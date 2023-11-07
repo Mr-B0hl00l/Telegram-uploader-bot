@@ -45,8 +45,9 @@ parser.add_argument('-d', '--directory', metavar="Directory1/directory2/",help='
 args = parser.parse_args()
 
 
-chat_id = ''#Enter Chat id
-bot = telegram.Bot(token='') #Enter Bot 
+chat_id = '' #Insert chat_id here
+bot_token = '' #Insert bot_token here
+bot = telegram.Bot(token=bot_token)
 
 async def send_file(file):
     await bot.send_document(chat_id, document=open(file, 'rb'))
@@ -59,14 +60,23 @@ async def send_directory(dir_path):
             await asyncio.sleep(1)
 
 async def main():
+    
+    if not bot_token or not chat_id:
+        print(f'{RED}Please enter telegram bot token or chat id in Telegram-uploader-bot.py{ENDC}\t\n')
+        exit()
+    success = False
     if args.file:
         await send_file(args.file)
-
+        success = True
     if args.directory:
         await send_directory(args.directory)
+        success = True
+    if success:
+        print(f'{GREEN}File or directory uploaded successfully{ENDC}\t\n')
+    else:
+        print(f'{RED}File or directory not uploaded{ENDC}\t\n')
 
 loop = asyncio.new_event_loop()
 asyncio.set_event_loop(loop)
 loop.run_until_complete(main())
 loop.close()
-
