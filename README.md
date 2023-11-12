@@ -7,7 +7,7 @@ Telegram-uploader is a simple tool written in Python that allows uploading a fil
 git clone https://github.com/Mr-B0hl00l/Telegram-uploader-bot.git
 cd Telegram-uploader-bot
 pip install -r requirements.txt
-pyinstaller telegram-uploader-bot.git --onefile
+pyinstaller telegram-uploader-bot.py --onefile
 mv telegram-uploader-bot /usr/bin/
 ```
 
